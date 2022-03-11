@@ -13,4 +13,4 @@ outputs:
     description: 'Time when action was logged at.'
 runs:
   using: 'node16'
-  main: 'npm i && index.js'
+  main: './dist/index.js'

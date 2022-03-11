@@ -1,10 +1,10 @@
 {
   "name": "log-action",
-  "version": "1.6",
+  "version": "1.7",
   "description": "REAL-TIME log GitHub action.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "ncc build index.js --minify"
   },
   "repository": {
     "type": "git",

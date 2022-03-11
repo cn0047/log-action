@@ -9,13 +9,12 @@ try {
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
 
-  const payload = github.context.payload;
-  console.log(`Payload: ${payload}`);
-
   const data = JSON.stringify({
       message: 'GitHub action',
-      payload: payload
+      payload: github.context.payload
   });
+  console.log(`Body data: ${data}`);
+
   const options = {
     hostname: 'realtimelog.herokuapp.com',
     port: 443,
@@ -26,9 +25,10 @@ try {
      'Content-Length': data.length
    }
   };
+
   const req = https.request(options, (res) => {
     res.on('data', (d) => {
-      process.stdout.write(d);
+      console.log(`Response: ${d}`);
     });
   });
   req.on('error', (e) => {

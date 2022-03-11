@@ -4,7 +4,8 @@
   "description": "REAL-TIME log GitHub action.",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js --minify"
+    "build": "ncc build index.js --minify",
+    "test": "echo 'error 501'"
   },
   "repository": {
     "type": "git",

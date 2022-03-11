@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+const https = require('https');
 const core = require('@actions/core');
 const github = require('@actions/github');
 
@@ -12,10 +12,30 @@ try {
   const payload = github.context.payload;
   console.log(`Payload: ${payload}`);
 
-  fetch('https://realtimelog.herokuapp.com/test', {
-    method: 'post', headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({message: 'GitHub action', payload: payload})
+  const options = {
+    hostname: 'realtimelog.herokuapp.com',
+    port: 443,
+    path: '/' + streamId,
+    method: 'POST',
+    headers: {
+     'Content-Type': 'application/json',
+     'Content-Length': data.length
+   }
+  };
+  const data = JSON.stringify({
+      message: 'GitHub action',
+      payload: payload
   });
+  const req = https.request(options, (res) => {
+    res.on('data', (d) => {
+      process.stdout.write(d);
+    });
+  });
+  req.on('error', (e) => {
+    console.error(e);
+  });
+  req.write(data);
+  req.end();
 } catch (error) {
   core.setFailed(error.message);
 }

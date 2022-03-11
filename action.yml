@@ -1,0 +1,13 @@
+name: 'REAL-TIME log action.'
+description: 'REAL-TIME log GitHub action.'
+inputs:
+  stream-id:
+    description: 'REAL-TIME log streamId.'
+    required: true
+    default: 'cn007b-log-action'
+outputs:
+  time:
+    description: 'Time when action was logged at.'
+runs:
+  using: 'node17'
+  main: 'index.js'

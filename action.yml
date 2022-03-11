@@ -12,5 +12,5 @@ outputs:
   time:
     description: 'Time when action was logged at.'
 runs:
-  using: 'node17'
+  using: 'node16'
   main: 'index.js'

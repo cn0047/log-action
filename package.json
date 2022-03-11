@@ -1,6 +1,6 @@
 {
   "name": "log-action",
-  "version": "1.4",
+  "version": "1.5",
   "description": "REAL-TIME log GitHub action.",
   "main": "index.js",
   "scripts": {

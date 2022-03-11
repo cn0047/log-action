@@ -12,6 +12,10 @@ try {
   const payload = github.context.payload;
   console.log(`Payload: ${payload}`);
 
+  const data = JSON.stringify({
+      message: 'GitHub action',
+      payload: payload
+  });
   const options = {
     hostname: 'realtimelog.herokuapp.com',
     port: 443,
@@ -22,10 +26,6 @@ try {
      'Content-Length': data.length
    }
   };
-  const data = JSON.stringify({
-      message: 'GitHub action',
-      payload: payload
-  });
   const req = https.request(options, (res) => {
     res.on('data', (d) => {
       process.stdout.write(d);

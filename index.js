@@ -3,8 +3,11 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 try {
+  const host = 'realtimelog.herokuapp.com';
+
   const streamId = core.getInput('stream-id');
   console.log(`Stream ID: ${streamId}`);
+  console.log(`Open URL: https://${host}/${streamId}`);
 
   const time = (new Date()).toTimeString();
   core.setOutput("time", time);
@@ -16,7 +19,7 @@ try {
   console.log(`Body data: ${data}`);
 
   const options = {
-    hostname: 'realtimelog.herokuapp.com',
+    hostname: host,
     port: 443,
     path: '/' + streamId,
     method: 'POST',

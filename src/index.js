@@ -12,7 +12,6 @@ const main = async () => {
   const streamId = core.getInput('stream-id');
   const message = core.getInput('message');
   const filePath = core.getInput('file-path');
-  const time = (new Date()).toTimeString();
 
   let file = '';
   if (filePath) {
@@ -20,21 +19,19 @@ const main = async () => {
     file = buffer.toString();
   }
   const reqData = JSON.stringify({
-      title: 'GitHub action',
+      title: 'GitHub Action.',
       message: message,
       file: file,
       payload: github.context.payload
   });
 
-  core.setOutput('StreamID', `${streamId}, Open URL: https://${host}/${streamId}`);
-  core.setOutput('Time', time);
-  core.setOutput('Message', message);
-  core.setOutput('FilePath', filePath);
-  core.setOutput('RequestData', reqData);
+  core.setOutput('stream-id', `${streamId}, Open URL: https://${host}/${streamId}`);
+  core.setOutput('file-path', filePath);
+  core.setOutput('request-data', reqData);
 
+  console.info('log', {streamId: streamId, reqData: reqData});
   log(streamId, reqData);
 }
-
 
 /**
  * Sends log to REAL-TIME log.
@@ -55,9 +52,7 @@ const log = async (streamId, reqData) => {
      }
     };
     const req = https.request(options, (res) => {
-      res.on('data', (resData) => {
-        core.setOutput('ResponseData', resData);
-      });
+      res.on('data', (resData) => core.setOutput('response-data', resData));
     });
     req.on('error', (err) => {
       core.setFailed(err);

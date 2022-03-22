@@ -17,17 +17,13 @@ inputs:
     required: false
     default: ''
 outputs:
-  StreamID:
+  stream-id:
     description: 'REAL-TIME log streamId.'
-  Time:
-    description: 'Time when action was logged at.'
-  Message:
-    description: 'Log message.'
-  FilePath:
+  file-path:
     description: 'Path to log file.'
-  RequestData:
+  request-data:
     description: 'REAL-TIME log request data.'
-  ResponseData:
+  response-data:
     description: 'REAL-TIME log Response data.'
 runs:
   using: 'node16'

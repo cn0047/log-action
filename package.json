@@ -1,10 +1,10 @@
 {
   "name": "log-action",
-  "version": "v1.11",
+  "version": "v1.12",
   "description": "REAL-TIME log GitHub action.",
   "main": "index.js",
   "scripts": {
-    "build": "ncc build index.js --minify",
+    "build": "ncc build src/index.js --minify",
     "test": "echo 'error 501'"
   },
   "repository": {

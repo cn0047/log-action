@@ -8,9 +8,27 @@ inputs:
     description: 'REAL-TIME log streamId.'
     required: true
     default: 'cn007b-log-action'
+  message:
+    description: 'Log message.'
+    required: false
+    default: ''
+  file-path:
+    description: 'Path to log file.'
+    required: false
+    default: ''
 outputs:
-  time:
+  StreamID:
+    description: 'REAL-TIME log streamId.'
+  Time:
     description: 'Time when action was logged at.'
+  Message:
+    description: 'Log message.'
+  FilePath:
+    description: 'Path to log file.'
+  RequestData:
+    description: 'REAL-TIME log request data.'
+  ResponseData:
+    description: 'REAL-TIME log Response data.'
 runs:
   using: 'node16'
   main: './dist/index.js'

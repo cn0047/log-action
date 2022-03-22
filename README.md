@@ -13,6 +13,10 @@ log action
 
 **Required** The REAL-TIME log streamId. Default `"cn007b-log-action"`.
 
+#### `message`
+
+The log message for REAL-TIME log. Default `""`.
+
 ## Outputs
 
 #### `time`
@@ -22,7 +26,8 @@ Time when action was logged at.
 ## Example usage
 
 ````
-uses: cn007b/log-action@v1.11
+uses: cn007b/log-action@v1.12
 with:
   stream-id: "cn007b-log-action"
+  message: "It works!"
 ````

@@ -5,36 +5,45 @@ const github = require('@actions/github');
 
 const host = 'realtimelog.herokuapp.com';
 
+/**
+ * Main function.
+ */
 const main = async () => {
+  const streamId = core.getInput('stream-id');
+  const message = core.getInput('message');
+  const filePath = core.getInput('file-path');
+  const time = (new Date()).toTimeString();
+
+  let file = '';
+  if (filePath) {
+    const buffer = await fs.readFileSync(filePath);
+    file = buffer.toString();
+  }
+  const reqData = JSON.stringify({
+      title: 'GitHub action',
+      message: message,
+      file: file,
+      payload: github.context.payload
+  });
+
+  core.setOutput('StreamID', `${streamId}, Open URL: https://${host}/${streamId}`);
+  core.setOutput('Time', time);
+  core.setOutput('Message', message);
+  core.setOutput('FilePath', filePath);
+  core.setOutput('RequestData', reqData);
+
+  log(streamId, reqData);
+}
+
+
+/**
+ * Sends log to REAL-TIME log.
+ *
+ * @required {string} streamId - REAL-TIME log streamId.
+ * @required {object} reqData - Request body data.
+ */
+const log = async (streamId, reqData) => {
   try {
-    // Read input params.
-    const streamId = core.getInput('stream-id');
-    core.setOutput('StreamID', `${streamId}, Open URL: https://${host}/${streamId}`);
-
-    const time = (new Date()).toTimeString();
-    core.setOutput('Time', time);
-
-    const message = core.getInput('message');
-    core.setOutput('Message', message);
-
-    const filePath = core.getInput('file-path');
-    core.setOutput('FilePath', filePath);
-
-    // Prepare data.
-    let file = '';
-    if (filePath) {
-      const buffer = await fs.readFileSync(filePath);
-      file = buffer.toString();
-    }
-    const reqData = JSON.stringify({
-        title: 'GitHub action',
-        message: message,
-        file: file,
-        payload: github.context.payload
-    });
-    core.setOutput('RequestData', reqData);
-
-    // Send request.
     const options = {
       hostname: host,
       port: 443,

@@ -26,7 +26,7 @@ Time when action was logged at.
 ## Example usage
 
 ````
-uses: cn007b/log-action@v1.12
+uses: cn007b/log-action@v1.13
 with:
   stream-id: "cn007b-log-action"
   message: "It works!"

@@ -28,8 +28,9 @@ const main = async () => {
   core.setOutput('stream-id', `${streamId}, Open URL: https://${host}/${streamId}`);
   core.setOutput('file-path', filePath);
   core.setOutput('request-data', reqData);
+  core.info(`stream-id: ${streamId}`);
+  core.info(`request-data: ${reqData}`);
 
-  console.info('log', {streamId: streamId, reqData: reqData});
   log(streamId, reqData);
 }
 
